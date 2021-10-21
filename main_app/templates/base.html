@@ -25,7 +25,7 @@
           </div>
           <div class="navbar-menu navbar-start">
             <a class="navbar-item" href="/about">About</a>
-            <a class="navbar-item" href="dogs/">Dogs</a>
+    
 
           </div>
           <div class="navbar-menu navbar-end">
@@ -38,7 +38,7 @@
           {% if user.is_authenticated %}
     <div class="navbar-menu navbar-end">
         <span class="navbar-item">Welcome: {{user.username}}</span>
-        <a class="navbar-item" href="{% url 'dog_list' %}">Artists</a>
+        <a class="navbar-item" href="{% url 'dog_list' %}">Dogs</a>
         <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
     </div>
 {% else %}
