@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'dogs_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'doggos',
+        'NAME': 'dog',
     }
 }
 
