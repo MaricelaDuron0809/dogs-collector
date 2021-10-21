@@ -12,5 +12,7 @@ path('dogs/<int:pk>/update',
          views.DogUpdate.as_view(), name="dog_update"),
 path('dogs/<int:pk>/delete',
          views.DogDelete.as_view(), name="dog_delete"),
+path('dogs/<int:pk>/treats/new/',
+         views.TreatCreate.as_view(), name="treat_create"),
  
 ]

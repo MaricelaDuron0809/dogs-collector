@@ -1,13 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View 
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
-
-
-from .models import Dog
+from .models import Dog, Treat
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"
@@ -55,3 +53,12 @@ class DogDelete(DeleteView):
     model = Dog
     template_name = "dog_delete_confirm.html"
     success_url = "/dogs/"  
+    
+class TreatCreate(View):
+
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        length = request.POST.get("length")
+        dog = Dog.objects.get(pk=pk)
+        Treat.objects.create(name=name, length=length, dog=dog)
+        return redirect('dog_detail', pk=pk)

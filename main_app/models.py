@@ -14,4 +14,12 @@ class Dog(models.Model):
 
     class Meta:
         ordering = ['name']
-        
+
+class Treat(models.Model):
+
+    name = models.CharField(max_length=150)
+    length = models.IntegerField(default=0)
+    dog = models.ForeignKey(Dog, on_delete=models.CASCADE, related_name="treats")
+
+    def __str__(self):
+        return self.name

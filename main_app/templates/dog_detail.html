@@ -26,6 +26,72 @@
       </span>
     </a>
   </div>
+<!-- FORM TO CREATE TREAT -->
+<form class="mb-5" action="{% url 'treat_create' dog.pk %}" method="post">
+  {% csrf_token %}
+  <div class="field has-addons">
+    <div class="control">
+      <input
+        class="input"
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+      />
+    </div>
+    <div class="control">
+      <input
+        class="input"
+        type="number"
+        name="length"
+        placeholder="Length in Inches"
+        min="1"
+        required
+      />
+    </div>
+    <div class="control">
+      <input class="button is-primary" type="submit" value="Add Treat" />
+    </div>
+  </div>
+</form>
+<!-- END OF FORM TO CREATE TREAT -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- TREAT DETAILS -->
+  <div class="detail__songs mb-5">
+    <h3 class="title is-3">Treats</h3>
+
+    {% for treat in dog.treats.all %}
+    <div class="song">
+      <span>{{forloop.counter}}</span>
+      <span><b>{{treat.name}}</b></span>
+      <span>{{treat.length}}</span>
+    </div>
+		{% empty %}
+    <article class="message">
+      <div class="message-header">
+        <p>No Treats Available</p>
+      </div>
+    </article>
+
+    {% endfor %}
+  </div>
+<!-- TREAT DETAILS END -->
+
+
+
+
+
   <div class="detail__about">
     <h4 class="title is-4">About</h4>
     <p>{{dog.bio}}</p>
