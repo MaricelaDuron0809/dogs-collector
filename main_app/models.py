@@ -23,3 +23,11 @@ class Treat(models.Model):
 
     def __str__(self):
         return self.name
+
+class Pawll(models.Model):
+
+    name = models.CharField(max_length=150)
+    dogs = models.ManyToManyField(Dog)
+
+    def __str__(self):
+        return self.name

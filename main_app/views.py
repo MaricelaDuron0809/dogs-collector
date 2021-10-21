@@ -5,10 +5,15 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
-from .models import Dog, Treat
+from .models import Dog, Treat, Pawll
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pawlls"] = Pawll.objects.all()
+        return context
 
 class About(TemplateView):
     template_name = "about.html"
@@ -41,6 +46,13 @@ class DogDetail(DetailView):
     model = Dog
     template_name = "dog_detail.html"
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pawlls"] = Pawll.objects.all()
+        return context
+    
+    
+    
 class DogUpdate(UpdateView):
     model = Dog
     fields = ['name', 'img', 'bio', 'verified_dog']
@@ -62,3 +74,13 @@ class TreatCreate(View):
         dog = Dog.objects.get(pk=pk)
         Treat.objects.create(name=name, length=length, dog=dog)
         return redirect('dog_detail', pk=pk)
+    
+class PawllDogAssoc(View):
+
+    def get(self, request, pk, dog_pk):
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            Pawll.objects.get(pk=pk).dogs.remove(dog_pk)
+        if assoc == "add":
+            Pawll.objects.get(pk=pk).dogs.add(dog_pk)
+        return redirect('home')

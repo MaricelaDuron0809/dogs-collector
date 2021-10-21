@@ -1,4 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Dogs Home</h1>
+
+<div class="home__playlists">
+    {% for pawll in pawlls %}
+  
+        <div class="playlist mb-5">
+          <h3 class="title is-3 has-text-success">{{pawll.name}}</h3>
+          <hr />
+  
+          {% for dog in pawll.dogs.all %}
+  
+              <div class="song">
+                <span>{{forloop.counter}}</span>
+                <span><b>{{dog.name}}</b></span>
+
+                <div class="song">
+                    <span>{{forloop.counter}}</span>
+                    <span><b>{{dog.name}}</b></span>
+                    <span>
+                      <a
+                        href="{% url 'pawll_dog_assoc' pawll.pk dog.pk %}?assoc=remove"
+                        class="button is-danger is-outlined"
+                      >
+                        <span class="icon is-small">
+                          <i class="fas fa-times"></i>
+                        </span>
+                      </a>
+                    </span>
+                  </div>
+              </div>
+  
+          {% endfor %}
+        </div>
+  
+    {% endfor %}
+
+
+
+
+    
+  </div>
+
+
+
+
+
+
+
 {% endblock %}
