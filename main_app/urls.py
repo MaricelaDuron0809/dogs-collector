@@ -16,5 +16,6 @@ path('dogs/<int:pk>/treats/new/',
          views.TreatCreate.as_view(), name="treat_create"),
 path('pawlls/<int:pk>/dogs/<int:dog_pk>/',
          views.PawllDogAssoc.as_view(), name="pawll_dog_assoc"),
+path('accounts/signup/', views.Signup.as_view(), name="signup"),
  
 ]
